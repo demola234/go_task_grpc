@@ -1,0 +1,5 @@
+containers: default: {
+    build: ".",
+    ports: publish: "8080/http2",
+  }
+  

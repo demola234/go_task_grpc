@@ -1,0 +1,4 @@
+containers: default: {
+    image: "nginx"
+    ports: publish: "8080/http"
+  }

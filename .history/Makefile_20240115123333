@@ -1,0 +1,46 @@
+DB_URL=postgresql://ademola:secret@localhost:5432/ademola?sslmode=disable
+
+postgres:
+	docker run --name todo -e DB_PORT=5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -e DB_HOST=docker.for.mac.host.internal -d postgres:14-alpine
+
+createdb:
+	docker exec -it todo createdb --username=root --owner=root todo
+
+dropdb:
+	docker exec -it todo dropdb todo
+
+migrateup:
+	migrate -path db/migration -database "$(DB_URL)" -verbose up
+
+migratedown:
+	migrate -path db/migration -database "$(DB_URL)" -verbose down
+
+sqlc:
+	sqlc generate
+
+server:
+	go run main.go
+
+test: 
+	go test -v -cover ./...
+
+mock: 
+	mockgen -package mockdb -destination db/mock/store.go github.com/demola234/todogrpc/db/sqlc Store
+
+air:
+	air
+
+proto:
+	https://www.notion.so/Web3-Research-Tokenized-community-Blockchain-credential-verification-e98270faa304416486e8f8f3a1c65f57?pvs=4#57059859c0be48b2b9e1237c71b4db06
+
+evans:
+	evans --host localhost --port 9090 -r repl
+
+db_docs:
+	dbdocs build doc/doc.dbml
+
+db_schema:
+	dbml2sql --postgress -o doc/schema.sql doc/doc.dbml
+
+
+.PHONY: createdb postgres dropdb migrateup migratedown sqlc server air proto evans db_docs db_schema mock test

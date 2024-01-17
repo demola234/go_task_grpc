@@ -1,0 +1,8 @@
+containers: {
+    calculator: {
+        path: 'src/containers/Calculator',
+        index: 'index.js',
+        css: 'index.css',
+        test: 'index.test.js',
+    },
+}

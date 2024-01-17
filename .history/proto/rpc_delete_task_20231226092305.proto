@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package pb;
+
+
+option go_package = "github.com/demola234/todogrpc/pb";
+
+message DeleteTaskRequest {
+    string id = 1;
+}
+
+
+message EmptyTaskRequest {
+   
+}

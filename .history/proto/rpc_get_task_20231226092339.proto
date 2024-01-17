@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package pb;
+
+import "task.proto";
+
+
+option go_package = "github.com/demola234/todogrpc/pb";
+
+message EmptyGetRequest {
+   
+}
+
+message GetAllTaskResponse {
+    repeated Task tasks = 1;
+}
+
+message UpdateTaskRequest {
+    int32 id = 1;
+    string title = 2;
+    string description = 3;
+    bool completed = 4;
+}
+
+message UpdateTaskResponse {
+    Task task = 1;
+}
+
+
+message CreateTaskRequest {
+    Task task = 1;
+}
+
+
+message CreateTaskResponse {
+    Task task = 1;
+}

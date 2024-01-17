@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package pb;
+
+
+option go_package = "github.com/demola234/todogrpc/pb";
+
+message CreateCategoryRequest {
+    string name = 1;
+    string description = 2;
+}
+
+message CreateCategoryResponse {
+    int id = 1;
+    string name = 2;
+    string description = 3;
+}

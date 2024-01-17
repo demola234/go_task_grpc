@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:12-alpine
+    environment:
+      - POSTGRES_USER=uddkmcckjwletymy6w6c
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=grpctodo
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_SOURCE=postgresql://uddkmcckjwletymy6w6c:BR3DYbIwcr8EK1VoUAYC4DW01dudeQ@br6m78q0x43ll3hu9om2-postgresql.services.clever-cloud.com:50013/br6m78q0x43ll3hu9om2
+      - postgres
+    entrypoint: ["/app/wait-for.sh", "postgres:50013", "--", "/app/start.sh" ]
+    command: ["/app/main"]

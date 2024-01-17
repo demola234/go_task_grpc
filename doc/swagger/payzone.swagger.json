@@ -1,0 +1,329 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "TodoGrpc",
+    "version": "1.0",
+    "contact": {
+      "name": "TodoGrpc",
+      "url": "https://github.com/demola234/todogrpc",
+      "email": "kolawoleoluwasegun567@gmail.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "TodoGrpc"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/create_task": {
+      "post": {
+        "summary": "Create a new task",
+        "description": "User this API to create a new task",
+        "operationId": "TodoGrpc_CreateTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbCreateTaskResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbCreateTaskRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Task"
+        ],
+        "security": []
+      }
+    },
+    "/api/v1/delete_task": {
+      "delete": {
+        "summary": "Delete a task",
+        "description": "User this API to delete a task",
+        "operationId": "TodoGrpc_DeleteTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbEmptyTaskRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Task"
+        ],
+        "security": []
+      }
+    },
+    "/api/v1/get_task": {
+      "get": {
+        "summary": "Get all task",
+        "description": "User this API to get all task",
+        "operationId": "TodoGrpc_GetTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetAllTaskResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Task"
+        ],
+        "security": []
+      }
+    },
+    "/api/v1/update_task": {
+      "put": {
+        "summary": "Update a task",
+        "description": "User this API to update a task",
+        "operationId": "TodoGrpc_UpdateTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbUpdateTaskResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbUpdateTaskRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Task"
+        ],
+        "security": []
+      }
+    }
+  },
+  "definitions": {
+    "pbCreateTaskRequest": {
+      "type": "object",
+      "properties": {
+        "taskName": {
+          "type": "string"
+        },
+        "taskDescription": {
+          "type": "string"
+        },
+        "taskDeadline": {
+          "type": "string"
+        },
+        "taskStatus": {
+          "type": "string"
+        },
+        "taskPriority": {
+          "type": "string"
+        },
+        "taskCreatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pbCreateTaskResponse": {
+      "type": "object",
+      "properties": {
+        "taskName": {
+          "type": "string"
+        },
+        "taskDescription": {
+          "type": "string"
+        },
+        "taskDeadline": {
+          "type": "string"
+        },
+        "taskStatus": {
+          "type": "string"
+        },
+        "taskPriority": {
+          "type": "string"
+        },
+        "taskCreatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "taskUpdatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "taskId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "pbEmptyTaskRequest": {
+      "type": "object"
+    },
+    "pbGetAllTaskResponse": {
+      "type": "object",
+      "properties": {
+        "tasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/pbTask"
+          }
+        }
+      }
+    },
+    "pbTask": {
+      "type": "object",
+      "properties": {
+        "taskName": {
+          "type": "string"
+        },
+        "taskDescription": {
+          "type": "string"
+        },
+        "taskDeadline": {
+          "type": "string"
+        },
+        "taskStatus": {
+          "type": "string"
+        },
+        "taskPriority": {
+          "type": "string"
+        },
+        "taskCreatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "taskUpdatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "taskId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "pbUpdateTaskRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "taskStatus": {
+          "type": "string"
+        },
+        "taskPriority": {
+          "type": "string"
+        }
+      }
+    },
+    "pbUpdateTaskResponse": {
+      "type": "object",
+      "properties": {
+        "task": {
+          "$ref": "#/definitions/pbTask"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "bearer": {
+      "type": "apiKey",
+      "description": "Authentication token, prefixed by Bearer: Bearer \u003ctoken\u003e",
+      "name": "Authorization Bearer",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "bearer": []
+    }
+  ]
+}

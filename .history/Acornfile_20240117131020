@@ -1,0 +1,6 @@
+container: {
+    task: {
+        build: ".",
+            po
+    }
+}
